@@ -1,3 +1,5 @@
+const { addDestinationInfo, pickPlanet } = require("./scriptHelper");
+
 window.addEventListener("load", function () {
 
     function init() {
@@ -15,25 +17,31 @@ window.addEventListener("load", function () {
         }
 
         let validNumber = true;
-        if (numQuestions.value === isNan) {
+        if (numQuestions.isNan(value)) {
             console.log("Please enter a number.");
             alert("Please enter a number");
             validNumber = false;
             event.preventDefault();
         }
-
-
     });
-
+    
     let listedPlanets = myFetch();
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-    let listedPlanetsResponse = myFetch();
+
+    let listedPlanetsResponse = fetch("https://handlers.education.launchcode.org/static/planets.json").then(function () {
+        return Response.json();
+    });
     listedPlanetsResponse.then(function (result) {
         listedPlanets = result;
         console.log(listedPlanets);
     }).then(function () {
         console.log(listedPlanets);
         // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+        // function planetPicker() {
+        //     if (pickPlanet() === "")
+        //     let randomIndex;
+        //    do randomIndex = Math.floor(Math.random() * results.length);
+        // }
     })
 
 });
